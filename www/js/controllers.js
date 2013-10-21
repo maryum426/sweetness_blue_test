@@ -2232,7 +2232,32 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----Show day----");
             $location.path("/kiosk/day");
         }
-
+        
+        //open camera 
+        
+        $scope.frontCamera = function(){
+            navigator.camera.getPicture(uploadPhoto,null,{
+                  sourceType:1,
+                  quality:50,
+                  cameraDirection:1,
+                  saveToPhotoAlbum:true});
+               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
+        }
+        
+        $scope.uploadPhoto = function(data){
+            
+            // this is where you would send the image file to server
+                //cameraPic.src = "data:image/jpeg;base64," + data;
+                
+                navigator.notification.alert(
+                    'Your Photo has been saved',  // message
+                    okay,                           // callback
+                    'Photo Saved',              // title
+                    'OK'                          // buttonName
+                );
+                
+            
+        }
         //blue
         $scope.kioskRegisterCancel = function(){
             console.log("----kioskRegisterCancel----");
