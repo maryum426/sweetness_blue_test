@@ -2292,7 +2292,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             //console.log ("Load Map" + document.getElementById('map_canvas'));
 
-           /*$scope.placeListing = [] ;
+           $scope.placeListing = [] ;
             //var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
             var map;
@@ -2311,9 +2311,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 alert("onSuccess() called!");
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-                        
-                    
-                map = new google.maps.Map(document.getElementById('map_canvas'), {
+                
+            var mapOptions = {
                 center:pos,
                 zoom:17,
                 panControl:false,
@@ -2324,14 +2323,17 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 zoomControl:true,
                 scaleControl:false,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-                });
+                };
+                    
+                map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
                      content: 'Location found.'
                      });*/
 
-                    /*var marker = new google.maps.Marker({
+                    var marker = new google.maps.Marker({
                         position:pos,
                         map:map,
                         title:'Location found.'
@@ -2355,7 +2357,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ Search Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            var input = (document.getElementById('target'));
+            /*var input = (document.getElementById('target'));
              var searchBox = new google.maps.places.SearchBox(input);
              var markers = [];
 
