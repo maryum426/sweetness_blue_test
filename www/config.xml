@@ -66,5 +66,10 @@
     </gap:plugin>
 
     <access origin="*" />
+    <access origin="*.googleapis.com" subdomain="true" />
+    <access origin="su.se" subdomains="true"/>
+    <access origin="mobileapp-dev.it.su.se" subdomains="true"/>
+    <access origin="*.gstatic.com" subdomains="true"/>
+    
 </widget>
 

@@ -1894,7 +1894,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             // Try HTML5 geolocation
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
+                navigator.geolocation.getCurrentPosition(onSuccess,onError);
+                
+               
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+            
+            function onSuccess(position) {
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
 
@@ -1911,14 +1919,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     });
 
                     map.setCenter(pos);
-                }, function () {
+                };
+                
+                 function onError() {
                     $scope.handleNoGeolocation(true);
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-
+                };
+                
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2287,9 +2293,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log ("Load Map" + document.getElementById('map_canvas'));
 
             $scope.placeListing = [] ;
-            var latlng = new google.maps.LatLng(-34.397, 150.644);
+            //var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            var map;/* = new google.maps.Map(document.getElementById('map_canvas'), {
                 center:latlng,
                 zoom:17,
                 panControl:false,
@@ -2301,17 +2307,39 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 /*zoomControlOptions: {
                  style: google.maps.ZoomControlStyle.SMALL
                  },*/
-                scaleControl:false,
+               // scaleControl:false,
 
-                mapTypeId:google.maps.MapTypeId.ROADMAP
-            });
+                //mapTypeId:google.maps.MapTypeId.ROADMAP
+            //});
 
             // Try HTML5 geolocation
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
+             if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(onSuccess,onError);
+                
+               
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+            
+            function onSuccess(position) {
+                alert("onSuccess() called!");
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-
+                        
+                    
+                map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center:pos,
+                zoom:17,
+                panControl:false,
+                mapTypeControl:true,
+                mapTypeControlOptions:{
+                    style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+                zoomControl:true,
+                scaleControl:false,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+                });
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
@@ -2324,15 +2352,14 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         title:'Location found.'
                     });
 
-                    map.setCenter(pos);
-                }, function () {
+                    //map.setCenter(pos);
+                };
+                
+                 function onError() {
+                     
                     $scope.handleNoGeolocation(true);
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-
+                };
+                
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
