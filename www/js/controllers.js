@@ -2290,27 +2290,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             $location.path('/kiosk/createSweetPlace');
 
-            console.log ("Load Map" + document.getElementById('map_canvas'));
+            //console.log ("Load Map" + document.getElementById('map_canvas'));
 
-            $scope.placeListing = [] ;
+           /*$scope.placeListing = [] ;
             //var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map;/* = new google.maps.Map(document.getElementById('map_canvas'), {
-                center:latlng,
-                zoom:17,
-                panControl:false,
-                mapTypeControl:true,
-                mapTypeControlOptions:{
-                    style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                },
-                zoomControl:true,
-                /*zoomControlOptions: {
-                 style: google.maps.ZoomControlStyle.SMALL
-                 },*/
-               // scaleControl:false,
-
-                //mapTypeId:google.maps.MapTypeId.ROADMAP
-            //});
+            var map;
 
             // Try HTML5 geolocation
              if (navigator.geolocation) {
@@ -2346,7 +2331,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                      content: 'Location found.'
                      });*/
 
-                    var marker = new google.maps.Marker({
+                    /*var marker = new google.maps.Marker({
                         position:pos,
                         map:map,
                         title:'Location found.'
@@ -2524,7 +2509,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
              }*/
 
             //Deletes all markers in the array by removing references to them
-            function deleteOverlays() {
+            /*function deleteOverlays() {
                 if (markersArray) {
                     for (var i = 0; markersArray.length; i++) {
                         markersArray[i].setMap(null);
@@ -2571,7 +2556,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             window.setTimeout(function () {
                 google.maps.event.trigger(map, 'resize');
-            }, 1000);
+            }, 1000);*/
         }
 
         $scope.handleNoGeolocation = function (errorFlag) {
