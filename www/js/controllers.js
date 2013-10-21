@@ -4085,8 +4085,9 @@ $scope.$watch($rootScope.publicName, function () {
         });
     }
 
-
     //phonegap login
+    var authData,id,access_token,expiration_date;
+
     $scope.phonegapFBLogin = function() {
         console.log('In home');
         
@@ -4094,7 +4095,7 @@ $scope.$watch($rootScope.publicName, function () {
             if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')}else {alert("Second Exists");};
             if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')}else {alert("Third Exists");};
           
-            var authData,id,access_token,expiration_date;
+            
             // Additional init code here
             FB.login(function (response) {
                 if (response.status === 'connected') {
@@ -4118,25 +4119,25 @@ $scope.$watch($rootScope.publicName, function () {
                 }
             },{ scope: "email,publish_actions" });
             
-            $scope.parseAuth(authData);
+            $scope.parseAuth();
         };
 
 //Parse Initialization
-     $scope.parseAuth = function(user){
+     $scope.parseAuth = function(){
          alert("Function: parseAuth() ");
-         alert ("UserID: " + user.id);
-         alert ("AcessToken: " + user.access_token);
+         alert ("UserID: " + authData.id);
+         alert ("AcessToken: " + authData.access_token);
          
          Parse.FacebookUtils.init({
         
                     appId      : "366407670138696", // app name : sweet_localhost
                     status:true, // check login status
                     cookie:true, // enable cookies to allow Parse to access the session
-                    xfbml:true, // parse XFBML,
-                    oauth:true
+                    xfbml:true // parse XFBML
+                    
                 });
                 
-         Parse.FacebookUtils.logIn(user, "email,publish_actions",{
+         Parse.FacebookUtils.logIn(authData, "email,publish_actions",{
              
                  success: function (_user) {
                         
