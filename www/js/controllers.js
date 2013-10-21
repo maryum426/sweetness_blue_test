@@ -4133,14 +4133,14 @@ $scope.$watch($rootScope.publicName, function () {
                     appId      : "366407670138696", // app name : sweet_localhost
                     status:true, // check login status
                     cookie:true, // enable cookies to allow Parse to access the session
-                    xfbml:true // parse XFBML
-                    
+                    xfbml:true, // parse XFBML
+                    oauth:true
                 });
                 
          Parse.FacebookUtils.logIn(authData, "email,publish_actions",{
              
                  success: function (_user) {
-                        
+                        alert("Logged In");
                 if (!_user.existed()) {
                     alert("User signed up and logged in through Facebook!");
                 } else {
@@ -4155,7 +4155,7 @@ $scope.$watch($rootScope.publicName, function () {
                  console.log("UserInfo ID -->" + user.id);
                  console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
 
-                facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
+                /*facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
                     $scope.safeApply(function () {
                         $scope.section.loginInProgress = false;
                         if (rUserChannel)
@@ -4172,7 +4172,7 @@ $scope.$watch($rootScope.publicName, function () {
                         alert("Successfully retrieved listPlaces " + $rootScope.listPlaces.length + " scores.");
                         $location.path(CONSTANTS.ROUTES.SWEET_HOME_PLACE);
                     });
-                });
+                });*/
                    
             },
             error:function (_user, error) {
