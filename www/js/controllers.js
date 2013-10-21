@@ -2382,7 +2382,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ Search Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            /*var input = (document.getElementById('target'));
+            var input = (document.getElementById('target'));
              var searchBox = new google.maps.places.SearchBox(input);
              var markers = [];
 
@@ -2454,7 +2454,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            /*var input = (document.getElementById('target'));
+            var input = (document.getElementById('target'));
             var autocomplete = new google.maps.places.Autocomplete(input);
 
             autocomplete.bindTo('bounds', map);
@@ -2490,7 +2490,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $rootScope.placeSearchResults.icon = place.icon;
                 $rootScope.placeSearchResults.formatted_address = place.formatted_address;
                 //}
-                marker.setIcon(*//** @type {google.maps.Icon} *//*({
+                marker.setIcon(/* @type {google.maps.Icon} */({
                     url:place.icon,
                     size:new google.maps.Size(71, 71),
                     origin:new google.maps.Point(0, 0),
@@ -2513,7 +2513,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 infowindow.open(map, marker);
             });
 
-*/
+
             //--------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------
             //add marker on double click
@@ -2536,7 +2536,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
              }*/
 
             //Deletes all markers in the array by removing references to them
-            /*function deleteOverlays() {
+            function deleteOverlays() {
                 if (markersArray) {
                     for (var i = 0; markersArray.length; i++) {
                         markersArray[i].setMap(null);
@@ -2583,7 +2583,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             window.setTimeout(function () {
                 google.maps.event.trigger(map, 'resize');
-            }, 1000);*/
+            }, 1000);
         }
 
         $scope.handleNoGeolocation = function (errorFlag) {
