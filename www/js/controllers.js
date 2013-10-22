@@ -1894,15 +1894,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             // Try HTML5 geolocation
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(onSuccess,onError);
-                
-               
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-            
-            function onSuccess(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
 
@@ -1919,12 +1911,14 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     });
 
                     map.setCenter(pos);
-                };
-                
-                 function onError() {
+                }, function () {
                     $scope.handleNoGeolocation(true);
-                };
-                
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2232,32 +2226,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----Show day----");
             $location.path("/kiosk/day");
         }
-        
-        //open camera 
-        
-        $scope.frontCamera = function(){
-            navigator.camera.getPicture(uploadPhoto,null,{
-                  sourceType:1,
-                  quality:50,
-                  cameraDirection:1,
-                  saveToPhotoAlbum:true});
-               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
-        }
-        
-        $scope.uploadPhoto = function(data){
-            
-            // this is where you would send the image file to server
-                //cameraPic.src = "data:image/jpeg;base64," + data;
-                
-                navigator.notification.alert(
-                    'Your Photo has been saved',  // message
-                    okay,                           // callback
-                    'Photo Saved',              // title
-                    'OK'                          // buttonName
-                );
-                
-            
-        }
+
         //blue
         $scope.kioskRegisterCancel = function(){
             console.log("----kioskRegisterCancel----");
@@ -2372,6 +2341,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     $scope.handleNoGeolocation(true);
                 };
                 
+                
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2454,7 +2424,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            var input = (document.getElementById('target'));
+            /*var input = (document.getElementById('target'));
             var autocomplete = new google.maps.places.Autocomplete(input);
 
             autocomplete.bindTo('bounds', map);
@@ -2490,7 +2460,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $rootScope.placeSearchResults.icon = place.icon;
                 $rootScope.placeSearchResults.formatted_address = place.formatted_address;
                 //}
-                marker.setIcon(/* @type {google.maps.Icon} */({
+                marker.setIcon(*//** @type {google.maps.Icon} *//*({
                     url:place.icon,
                     size:new google.maps.Size(71, 71),
                     origin:new google.maps.Point(0, 0),
@@ -2513,7 +2483,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 infowindow.open(map, marker);
             });
 
-
+*/
             //--------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------
             //add marker on double click
@@ -4019,22 +3989,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             phone:null
         };
     };
-$scope.$watch($rootScope.publicName, function () {
-        try {
-                                      alert('Device is ready! Make sure you set your app_id below this alert.');
-                                      
-                                      FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
-                                      
-                                      //FB.getLoginStatus(function(response){
-                                      //fbApiInit = true;
 
-                                   
-                                      } catch (e) {
-                                      alert("Hello: "+e);
-                                      }
-       
-    });
-    
     $scope.newAuth = function () {
 
         //console.log("\n--- AuthController ---");
@@ -4124,7 +4079,8 @@ $scope.$watch($rootScope.publicName, function () {
         });
     }
 
-    //phonegap login
+
+   //phonegap login
     var authData,id,access_token,expiration_date;
 
     $scope.phonegapFBLogin = function() {
@@ -4194,7 +4150,7 @@ $scope.$watch($rootScope.publicName, function () {
                  console.log("UserInfo ID -->" + user.id);
                  console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
 
-                /*facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
+                facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
                     $scope.safeApply(function () {
                         $scope.section.loginInProgress = false;
                         if (rUserChannel)
@@ -4211,7 +4167,7 @@ $scope.$watch($rootScope.publicName, function () {
                         alert("Successfully retrieved listPlaces " + $rootScope.listPlaces.length + " scores.");
                         $location.path(CONSTANTS.ROUTES.SWEET_HOME_PLACE);
                     });
-                });*/
+                });
                    
             },
             error:function (_user, error) {
