@@ -4123,7 +4123,16 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             });
         });
     }
-
+    
+    $scope.capturePhoto = function(){
+            alert("capturePhoto() called!");
+            navigator.camera.getPicture(null,null,{
+                  sourceType:1,
+                  quality:40,
+                  cameraDirection:1,
+                  saveToPhotoAlbum:true});
+               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
+        };
 
    //phonegap login
     var authData,id,access_token,expiration_date;
@@ -4138,10 +4147,10 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             
             // Additional init code here
             FB.login(function (response) {
-                if (response.status === 'connected') {
+                if (response.session) {
                     alert("Connected");
-                    id = response.authResponse.userID;
-                    access_token = response.authResponse.accessToken;
+                    id = session.authResponse.userID;
+                    access_token = session.authResponse.accessToken;
                     expiration_date = new Date();
                     expiration_date.setSeconds(expiration_date.getSeconds() + response.authResponse.expiresIn);
                     expiration_date = expiration_date.toISOString();
