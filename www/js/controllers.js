@@ -4115,8 +4115,8 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             FB.login(function (response) {
                 if (response.session) {
                     alert("Connected");
-                    id = session.authResponse.userID;
-                    access_token = session.authResponse.accessToken;
+                    id = response.authResponse.userID;
+                    access_token = response.authResponse.accessToken;
                     expiration_date = new Date();
                     expiration_date.setSeconds(expiration_date.getSeconds() + response.authResponse.expiresIn);
                     expiration_date = expiration_date.toISOString();
