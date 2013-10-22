@@ -2224,7 +2224,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             navigator.camera.getPicture(null,null,{
                   sourceType:1,
                   quality:40,
-                  cameraDirection:1,
+                  cameraDirection:0,
                   saveToPhotoAlbum:true});
                navigator.notification.alert(message, alertCallback, [title], [buttonName]);
         };
@@ -4124,16 +4124,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
         });
     }
     
-    $scope.capturePhoto = function(){
-            alert("capturePhoto() called!");
-            navigator.camera.getPicture(null,null,{
-                  sourceType:1,
-                  quality:40,
-                  cameraDirection:1,
-                  saveToPhotoAlbum:true});
-               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
-        };
-
+   
    //phonegap login
     var authData,id,access_token,expiration_date;
 
