@@ -3990,6 +3990,23 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
         };
     };
 
+
+    $scope.$watch($rootScope.publicName, function () {
+        try {
+                                      alert('Device is ready! Make sure you set your app_id below this alert.');
+                                      
+                                      FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
+                                      
+                                      //FB.getLoginStatus(function(response){
+                                      //fbApiInit = true;
+
+                                   
+                                      } catch (e) {
+                                      alert("Hello: "+e);
+                                      }
+       
+    });
+    
     $scope.newAuth = function () {
 
         //console.log("\n--- AuthController ---");
