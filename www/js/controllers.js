@@ -2220,6 +2220,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //open camera 
         
         $scope.capturePhoto = function(){
+            alert("capturePhoto() called!");
             navigator.camera.getPicture(uploadPhoto,null,{
                   sourceType:1,
                   quality:50,
@@ -2256,6 +2257,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //blue
         $scope.kioskRegisterCancel = function(){
             console.log("----kioskRegisterCancel----");
+            $location.path("/auth/new");
         }
 
         //blue
