@@ -2223,7 +2223,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             alert("capturePhoto() called!");
             navigator.camera.getPicture(null,null,{
                   sourceType:1,
-                  quality:50,
+                  quality:40,
                   cameraDirection:1,
                   saveToPhotoAlbum:true});
                navigator.notification.alert(message, alertCallback, [title], [buttonName]);

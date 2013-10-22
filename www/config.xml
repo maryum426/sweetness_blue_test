@@ -64,6 +64,8 @@
     <param name="APP_ID" value="366407670138696"/>
     <param name="APP_NAME" value="sweetness_localhost" />
     </gap:plugin>
+    
+    <plugin name="Camera" value="CDVCamera" />
 
     <access origin="*" />
     <access origin="*.googleapis.com"/>
