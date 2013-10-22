@@ -721,7 +721,19 @@ Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l
 
 
 
-
+setTimeout(function () {
+    /*
+     Parse.FacebookUtils.init({
+     //              TODO: What if user revoke Sweet app permissions
+     appId      : "465464716837107",
+     channelUrl : "http://localhost.local/sweet/bubble/channel.html", // Channel File
+     status     : true,  // check login status
+     cookie     : true,  // enable cookies to allow Parse to access the session
+     xfbml      : true,  // parse XFBML,
+     oauth      : true
+     });*/
+    
+}, 1000);
 
 /*window.fbAsyncInit = function() {
     console.log('Test fb login');

@@ -2221,13 +2221,13 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         
         $scope.capturePhoto = function(){
             alert("capturePhoto() called!");
-            navigator.camera.getPicture(uploadPhoto,null,{
+            navigator.camera.getPicture(null,null,{
                   sourceType:1,
                   quality:50,
                   cameraDirection:1,
                   saveToPhotoAlbum:true});
                navigator.notification.alert(message, alertCallback, [title], [buttonName]);
-        }
+        };
         
         $scope.uploadPhoto = function(data){
             
@@ -2257,7 +2257,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //blue
         $scope.kioskRegisterCancel = function(){
             console.log("----kioskRegisterCancel----");
-            $location.path("/auth/new");
+            $location.path("/u/auth");
         }
 
         //blue
@@ -4139,6 +4139,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             // Additional init code here
             FB.login(function (response) {
                 if (response.status === 'connected') {
+                    alert("Connected");
                     id = response.authResponse.userID;
                     access_token = response.authResponse.accessToken;
                     expiration_date = new Date();
@@ -4152,10 +4153,10 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                      
                 } else if (response.status === 'not_authorized') {
                     // not_authorized
-                    console.log('not_authorized');
+                    alert('not_authorized');
                 } else {
                     // not_logged_in
-                    console.log('not_logged_in');
+                    alert('not_logged_in');
                 }
             },{ scope: "email,publish_actions" });
             
@@ -4168,15 +4169,17 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
          alert ("UserID: " + authData.id);
          alert ("AcessToken: " + authData.access_token);
          
-         Parse.FacebookUtils.init({
-        
-                    appId      : "366407670138696", // app name : sweet_localhost
-                    status:true, // check login status
-                    cookie:true, // enable cookies to allow Parse to access the session
-                    xfbml:true, // parse XFBML
-                    oauth:true
-                });
-                
+         setTimeout(function () {
+                Parse.FacebookUtils.init({
+
+                           appId      : "366407670138696", // app name : sweet_localhost
+                           status:true, // check login status
+                           cookie:true, // enable cookies to allow Parse to access the session
+                           xfbml:true, // parse XFBML
+                           oauth:true
+                       });
+                       alert("Parse Facebook Utility Initialized!");
+        }, 1000);
          Parse.FacebookUtils.logIn(authData, "email,publish_actions",{
              
                  success: function (_user) {
