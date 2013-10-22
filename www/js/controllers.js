@@ -2216,7 +2216,33 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----Set Visibility----");
             $location.path("/kiosk/register_visibility");
         }
-
+        
+        //open camera 
+        
+        $scope.capturePhoto = function(){
+            navigator.camera.getPicture(uploadPhoto,null,{
+                  sourceType:1,
+                  quality:50,
+                  cameraDirection:1,
+                  saveToPhotoAlbum:true});
+               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
+        }
+        
+        $scope.uploadPhoto = function(data){
+            
+            // this is where you would send the image file to server
+                //cameraPic.src = "data:image/jpeg;base64," + data;
+                
+                navigator.notification.alert(
+                    'Your Photo has been saved',  // message
+                    okay,                           // callback
+                    'Photo Saved',              // title
+                    'OK'                          // buttonName
+                );
+                
+            
+        }
+        
         $scope.showCalendar = function(){
             console.log("----Show calendar----");
             $location.path("/kiosk/calendar");

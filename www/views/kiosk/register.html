@@ -12,7 +12,7 @@
                         </sweetfileselect>
                         <span class="profile-img-main heart-big-profile">
                             <img  ng-show='userAvatar' ng-src="{{userAvatar}}" class="imgavatar"/>
-                            <img src="images/capture-img.png" alt="Profile Picture"  ng-show='!userAvatar'>
+                            <img src="images/capture-img.png" ng-click="capturePhoto()" alt="Profile Picture"  ng-show='!userAvatar'>
                         </span>
                     </div>
 
