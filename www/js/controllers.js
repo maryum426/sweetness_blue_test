@@ -4795,7 +4795,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     $scope.capturePhoto = function() {
         var options =   {
             quality: 50,
-            cameraDirection:0,
+            cameraDirection:1,
             saveToPhotoAlbum:true,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             encodingType: 0     // 0=JPG 1=PNG
