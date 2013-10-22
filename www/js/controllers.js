@@ -2217,32 +2217,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             $location.path("/kiosk/register_visibility");
         }
         
-        //open camera 
         
-        $scope.capturePhoto = function(){
-            alert("capturePhoto() called!");
-            navigator.camera.getPicture(null,null,{
-                  sourceType:1,
-                  quality:40,
-                  cameraDirection:0,
-                  saveToPhotoAlbum:true});
-               navigator.notification.alert(message, alertCallback, [title], [buttonName]);
-        };
-        
-        $scope.uploadPhoto = function(data){
-            
-            // this is where you would send the image file to server
-                //cameraPic.src = "data:image/jpeg;base64," + data;
-                
-                navigator.notification.alert(
-                    'Your Photo has been saved',  // message
-                    okay,                           // callback
-                    'Photo Saved',              // title
-                    'OK'                          // buttonName
-                );
-                
-            
-        }
         
         $scope.showCalendar = function(){
             console.log("----Show calendar----");
@@ -4809,6 +4784,39 @@ function SweetCtrlPlace($window, UpdateService, $log, $scope, sweetService, inte
     };
 }
 
+
+function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interactionService, authService,
+                        userService, $location, utilService, $rootScope, CONSTANTS, socialNetworksService, facebookService, $route,
+                        $routeParams) {
+                            
+    //open camera 
+        
+        
+    $scope.capturePhoto = function() {
+        var options =   {
+            quality: 50,
+            cameraDirection:0,
+            saveToPhotoAlbum:true,
+            sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+            encodingType: 0     // 0=JPG 1=PNG
+        };
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.camera.getPicture(onSuccess,onFail,options);
+    };
+    var onSuccess = function(imageData) {
+        alert("On Success! ");
+        navigator.notification.alert(
+                    'Your Photo has been saved',  // message
+                    okay,                           // callback
+                    'Photo Saved',              // title
+                    'OK'                          // buttonName
+                );
+        $scope.$apply();
+    };
+    var onFail = function(e) {
+        alert("On fail " + e);
+    };
+}
 //alpha
 /*
 function mapController($scope) {
