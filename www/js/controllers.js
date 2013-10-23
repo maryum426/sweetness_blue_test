@@ -4113,7 +4113,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             
             // Additional init code here
             FB.login(function (response) {
-                if (response.status == "connected") {
+                if (response.status === 'connected') {
                     alert("Connected");
                     id = response.authResponse.userID;
                     access_token = response.authResponse.accessToken;
@@ -4134,6 +4134,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                     alert('not_logged_in');
                 }
                 $scope.parseAuth();
+                document.getElementById('data').innerHTML = JSON.stringify(response);
             },{ scope: "email,publish_actions" });
             
             
