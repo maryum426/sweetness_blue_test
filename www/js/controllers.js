@@ -4120,9 +4120,60 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')}else {alert("Second Exists");};
             if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')}else {alert("Third Exists");};
           
+            FB.login(function (response) {
+                if (response.status === 'connected') {
+                    alert("Connected");
+                    Parse.FacebookUtils.logIn(null,{
+             
+                 success: function (_user) {
+                        alert("Logged In");
+                if (!_user.existed()) {
+                    alert("User signed up and logged in through Facebook!");
+                } else {
+                    alert("User logged in through Facebook!");
+                }
+                facebookService.getExtendedToken(function (success) {
+                    alert("---Extended Token--- " + success);
+                });
+//                    cb(user);
+
+                /*console.log("UserInfo -->" + _.pairs(user));
+                 console.log("UserInfo ID -->" + user.id);
+                 console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
+
+                facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
+                    $scope.safeApply(function () {
+                        $scope.section.loginInProgress = false;
+                        if (rUserChannel)
+                            $rootScope.loadUserChannel();
+                        //$location.path(CONSTANTS.ROUTES.SWEET_HOME);
+                    });
+                });
+
+                // Get user places
+                sweetService.getUserPlaces(_user.get("authData")["facebook"]["id"], function (placeUserSweets) {
+                    alert("Successfully retrieved placeUserSweets " + placeUserSweets.length + " scores.");
+                    $scope.safeApply(function () {
+                        $rootScope.listPlaces = placeUserSweets;
+                        alert("Successfully retrieved listPlaces " + $rootScope.listPlaces.length + " scores.");
+                        $location.path(CONSTANTS.ROUTES.SWEET_HOME_PLACE);
+                    });
+                });
+                   
+            },
+            error:function (_user, error) {
+                alert("User cancelled the Facebook login or did not fully authorize.");
+                alert(error.message);
+//                    cb(null);
+                }
+            });
+                    
+                };
+              document.getElementById('data').innerHTML = JSON.stringify(response);  
+           },{ scope: "email,publish_actions" });
             
             // Additional init code here
-            FB.login(function (response) {
+           /* FB.login(function (response) {
                 if (response.status === 'connected') {
                     alert("Connected");
                     id = response.authResponse.userID;
@@ -4145,7 +4196,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                 }
                 $scope.parseAuth();
                 document.getElementById('data').innerHTML = JSON.stringify(response);
-            },{ scope: "email,publish_actions" });
+            },{ scope: "email,publish_actions" });*/
             
             
         };
