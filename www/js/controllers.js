@@ -4120,11 +4120,11 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')}else {alert("Second Exists");};
             if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')}else {alert("Third Exists");};
           
-            FB.login(function (response) {
-                if (response.status === 'connected') {
-                    alert("Connected");
-                    Parse.FacebookUtils.logIn(null,{
-             
+            //FB.login(function (response) {
+                //if (response.status === 'connected') {
+                    //alert("Connected");
+                    
+             Parse.FacebookUtils.logIn("email,publish_actions",{
                  success: function (_user) {
                         alert("Logged In");
                 if (!_user.existed()) {
@@ -4168,9 +4168,9 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                 }
             });
                     
-                };
+                //};
               document.getElementById('data').innerHTML = JSON.stringify(response);  
-           },{ scope: "email,publish_actions" });
+           //},{ scope: "email,publish_actions" });
             
             // Additional init code here
            /* FB.login(function (response) {
