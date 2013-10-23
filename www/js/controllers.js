@@ -3998,8 +3998,18 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
         try {
                                       alert('Device is ready! Make sure you set your app_id below this alert.');
                                       
-                                      FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
-                                      
+                                      //FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
+                                      Parse.FacebookUtils.init({
+
+                                        appId      : "366407670138696", // app name : sweet_localhost
+                                        nativeInterface: CDV.FB,
+                                        useCachedDialogs: false,
+                                        status:true, // check login status
+                                        cookie:true, // enable cookies to allow Parse to access the session
+                                        xfbml:true, // parse XFBML
+                                        oauth:true
+                                    });
+                                    alert("Parse Facebook Utility Initialized!");
                                       //FB.getLoginStatus(function(response){
                                       //fbApiInit = true;
 
@@ -4147,15 +4157,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
          alert ("AcessToken: " + authData.access_token);
          
          
-                Parse.FacebookUtils.init({
-
-                           appId      : "366407670138696", // app name : sweet_localhost
-                           status:true, // check login status
-                           cookie:true, // enable cookies to allow Parse to access the session
-                           xfbml:true, // parse XFBML
-                           oauth:true
-                       });
-                       alert("Parse Facebook Utility Initialized!");
+                
          
         
          Parse.FacebookUtils.logIn(authData, "email,publish_actions",{
