@@ -4113,7 +4113,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             
             // Additional init code here
             FB.login(function (response) {
-                if (response.session) {
+                if (response.status == "connected") {
                     alert("Connected");
                     id = response.authResponse.userID;
                     access_token = response.authResponse.accessToken;
@@ -4133,9 +4133,10 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                     // not_logged_in
                     alert('not_logged_in');
                 }
+                $scope.parseAuth();
             },{ scope: "email,publish_actions" });
             
-            $scope.parseAuth();
+            
         };
 
 //Parse Initialization
@@ -4144,7 +4145,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
          alert ("UserID: " + authData.id);
          alert ("AcessToken: " + authData.access_token);
          
-         setTimeout(function () {
+         
                 Parse.FacebookUtils.init({
 
                            appId      : "366407670138696", // app name : sweet_localhost
@@ -4154,7 +4155,8 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                            oauth:true
                        });
                        alert("Parse Facebook Utility Initialized!");
-        }, 1000);
+         
+        
          Parse.FacebookUtils.logIn(authData, "email,publish_actions",{
              
                  success: function (_user) {
