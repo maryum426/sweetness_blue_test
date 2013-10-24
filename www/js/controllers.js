@@ -4847,26 +4847,36 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                             
     //open camera 
         
-        
+    var imageData;
     $scope.capturePhoto = function() {
         var options =   {
             quality: 50,
             cameraDirection:1,
             saveToPhotoAlbum:true,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
-            encodingType: 0     // 0=JPG 1=PNG
+            encodingType: 0,     // 0=JPG 1=PNG
+            destinationType: Camera.DestinationType.FILE_URI
         };
         // Take picture using device camera and retrieve image as base64-encoded string
         navigator.camera.getPicture(onSuccess,onFail,options);
     };
-    var onSuccess = function(imageData) {
+    var onSuccess = function(data) {
         alert("On Success! ");
-        navigator.notification.alert(
-                    'Your Photo has been saved',  // message
-                    okay,                           // callback
-                    'Photo Saved',              // title
-                    'OK'                          // buttonName
-                );
+        imageData=data;
+        
+        if(imageData !== "") {
+			var parseFile = new Parse.File("MyPic.jpg", {base64:imagedata});
+			alert("ParseFile: " + parseFile);
+				parseFile.save().then(function() {
+					$rootScope.userAvatar = parseFile;
+					
+				}, function(error) {
+					console.log("Error");
+					console.log(error);
+				});
+ 
+		}
+        
         $scope.$apply();
     };
     var onFail = function(e) {
