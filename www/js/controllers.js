@@ -4861,10 +4861,12 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data) {
         alert("On Success! ");
-        imageData=data;
+        imageData=data.substr(data.lastIndexOf('/')+1);
+        //imageData=data;
         alert("ImageData: " + imageData);
         Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
         if(imageData !== "") {
+            alert("Inside If!");
 			var parseFile = new Parse.File("MyPic.jpg", {base64:imagedata});
 			alert("ParseFile: " + parseFile);
 				parseFile.save().then(function() {
