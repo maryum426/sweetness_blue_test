@@ -4892,13 +4892,19 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
 				});
  
 		}
-        }
+        };
         
         reader.onerror = function(evt) {
         console.log('read error');
         console.log(JSON.stringify(evt));
-        }
-        })   //$scope.$apply();
+        };
+        
+        entry.file(function(s) {
+            reader.readAsArrayBuffer(s);
+        }, function(e) {
+            console.log('ee');
+        });
+        });   //$scope.$apply();
     };
     var onFail = function(e) {
         alert("On fail " + e);
