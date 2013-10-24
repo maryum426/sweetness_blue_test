@@ -4849,6 +4849,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
     var imageData;
     $scope.capturePhoto = function() {
+        e.preventDefault();
+        var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
+        var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
+
+        //Initialize Parse
+        Parse.initialize(parseAPPID,parseJSID);
+        
         var options =   {
             quality: 50,
             cameraDirection:1,
@@ -4860,14 +4867,15 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data) {
         alert("On Success! ");
-        //Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
+        
+        
         //imageData=data.substr(data.lastIndexOf('/')+1);
         //imageData=data;
         
         var parseFile = new Parse.File("mypic.jpg", {base64:data});
         alert("ParseFile: ");    
         parseFile.save().then(function() {
-                alert("Got it!", null);
+                alert("Got it!");
                 $rootScope.userAvatar = parseFile.url();
                 console.log("Ok");
                 console.log(arguments.toString());
