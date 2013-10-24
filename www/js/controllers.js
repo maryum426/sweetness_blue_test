@@ -4854,7 +4854,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             cameraDirection:1,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             encodingType: 0,     // 0=JPG 1=PNG
-            destinationType: Camera.DestinationType.FILE_URI
+            destinationType: Camera.DestinationType.DATA_URL
         };
         // Take picture using device camera and retrieve image as base64-encoded string
         navigator.camera.getPicture(onSuccess,onFail,options);
@@ -4864,7 +4864,18 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
         //imageData=data.substr(data.lastIndexOf('/')+1);
         imageData=data;
-        window.resolveLocalFileSystemURI(imageData, function(entry) {
+        
+        var parseFile = new Parse.File("mypic.jpg", {base64:data});
+            parseFile.save().then(function() {
+                navigator.notification.alert("Got it!", null);
+                $rootScope.userAvatar = "data:image/jpeg;base64," + data;
+                console.log("Ok");
+                console.log(arguments.toString());
+            }, function(error) {
+                console.log("Error");
+                console.log(error);
+            });
+        /*window.resolveLocalFileSystemURI(imageData, function(entry) {
         alert("ImageData: " + imageData);
         var reader = new FileReader();
 
@@ -4905,7 +4916,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             console.log('ee');
         });
         });   //$scope.$apply();
-    };
+    };*/
     var onFail = function(e) {
         alert("On fail " + e);
     };
