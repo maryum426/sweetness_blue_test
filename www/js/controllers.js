@@ -4861,16 +4861,30 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data) {
         alert("On Success! ");
-        imageData=data.substr(data.lastIndexOf('/')+1);
-        //imageData=data;
-        alert("ImageData: " + imageData);
         Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
+        //imageData=data.substr(data.lastIndexOf('/')+1);
+        imageData=data;
+        window.resolveLocalFileSystemURI(imageData, function(entry) {
+        alert("ImageData: " + imageData);
+        var reader = new FileReader();
+
+        reader.onloadend = function(evt) {
+            var byteArray = new Uint8Array(evt.target.result);
+            var output = new Array( byteArray.length );
+            var i = 0;
+            var n = output.length;
+            while( i < n ) {
+                output[i] = byteArray[i];
+                i++;
+            }          
+            
         if(imageData !== "") {
             alert("Inside If!");
-			//var parseFile = new Parse.File("MyPic.jpg", {base64:imagedata});
+			var parseFile = new Parse.File("MyPic.jpg",output);
 			alert("ParseFile: " + parseFile);
 				parseFile.save().then(function() {
-					$rootScope.userAvatar = "data:image/jpeg;base64," + data;
+                                    navigator.notification.alert("Got it!", null);
+                                    $rootScope.userAvatar = "data:image/jpeg;base64," + data;
 					
 				}, function(error) {
 					console.log("Error");
@@ -4878,8 +4892,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
 				});
  
 		}
+        }
         
-        //$scope.$apply();
+        reader.onerror = function(evt) {
+        console.log('read error');
+        console.log(JSON.stringify(evt));
+        }
+        })   //$scope.$apply();
     };
     var onFail = function(e) {
         alert("On fail " + e);
