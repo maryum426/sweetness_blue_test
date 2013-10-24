@@ -4852,7 +4852,6 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         var options =   {
             quality: 50,
             cameraDirection:1,
-            saveToPhotoAlbum:true,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             encodingType: 0,     // 0=JPG 1=PNG
             destinationType: Camera.DestinationType.FILE_URI
@@ -4863,12 +4862,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     var onSuccess = function(data) {
         alert("On Success! ");
         imageData=data;
-        
+        alert("ImageData: " + imageData);
+        Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
         if(imageData !== "") {
 			var parseFile = new Parse.File("MyPic.jpg", {base64:imagedata});
 			alert("ParseFile: " + parseFile);
 				parseFile.save().then(function() {
-					$rootScope.userAvatar = parseFile;
+					$rootScope.userAvatar = "data:image/jpeg;base64," + data;
 					
 				}, function(error) {
 					console.log("Error");
