@@ -4852,7 +4852,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         var options =   {
             quality: 50,
             cameraDirection:1,
-            sourceType: 0,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+            sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             destinationType: Camera.DestinationType.DATA_URL
         };
         // Take picture using device camera and retrieve image as base64-encoded string
@@ -4860,12 +4860,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data) {
         alert("On Success! ");
-        Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
+        //Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
         //imageData=data.substr(data.lastIndexOf('/')+1);
         //imageData=data;
         
         var parseFile = new Parse.File("mypic.jpg", {base64:data});
-            parseFile.save().then(function() {
+        alert("ParseFile: ");    
+        parseFile.save().then(function() {
                 alert("Got it!", null);
                 $rootScope.userAvatar = parseFile.url();
                 console.log("Ok");
