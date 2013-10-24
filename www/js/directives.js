@@ -1140,6 +1140,7 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                         scope.$apply(function(){
 
                             scope.swfile = data.url;
+                            alert (data.url);
                             console.log("File available at: " + scope.swfile);
                             //var query = new Parse.Query("UserChannel");
                             var query = new Parse.Query("PlaceSweetness");
@@ -1148,6 +1149,7 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                             console.log("---sweetfleseelect---- userId"+scope.userid);
                             query.first({
                                 success:function(rUserChannel) {
+                                    alert (data.url);
                                     console.log("---sweetfileselect--- "+rUserChannel.id);
                                     rUserChannel.set("avatarURL",data.url);
                                     rUserChannel.save(null,{
