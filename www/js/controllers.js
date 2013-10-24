@@ -4869,54 +4869,14 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             parseFile.save().then(function() {
                 navigator.notification.alert("Got it!", null);
                 $rootScope.userAvatar = "data:image/jpeg;base64," + data;
-                console.log("Ok");
+                console.log("Ok");s
                 console.log(arguments.toString());
             }, function(error) {
                 console.log("Error");
                 console.log(error);
             });
-        /*window.resolveLocalFileSystemURI(imageData, function(entry) {
-        alert("ImageData: " + imageData);
-        var reader = new FileReader();
-
-        reader.onloadend = function(evt) {
-            var byteArray = new Uint8Array(evt.target.result);
-            var output = new Array( byteArray.length );
-            var i = 0;
-            var n = output.length;
-            while( i < n ) {
-                output[i] = byteArray[i];
-                i++;
-            }          
-            
-        if(imageData !== "") {
-            alert("Inside If!");
-			var parseFile = new Parse.File("MyPic.jpg",output);
-			alert("ParseFile: " + parseFile);
-				parseFile.save().then(function() {
-                                    navigator.notification.alert("Got it!", null);
-                                    $rootScope.userAvatar = "data:image/jpeg;base64," + data;
-					
-				}, function(error) {
-					console.log("Error");
-					console.log(error);
-				});
- 
-		}
-        };
-        
-        reader.onerror = function(evt) {
-        console.log('read error');
-        console.log(JSON.stringify(evt));
-        };
-        
-        entry.file(function(s) {
-            reader.readAsArrayBuffer(s);
-        }, function(e) {
-            console.log('ee');
-        });
-        });   //$scope.$apply();
-    };*/
+    };
+       
     var onFail = function(e) {
         alert("On fail " + e);
     };
