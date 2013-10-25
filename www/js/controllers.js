@@ -4878,6 +4878,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 alert("Got it!");
                 $rootScope.userAvatar = parseFile.url();
                 alert (parseFile.url());
+                $rootScope.$broadcast("load_user_channel");
                 console.log("Ok");
                 console.log(arguments.toString());
             }, function(error) {
