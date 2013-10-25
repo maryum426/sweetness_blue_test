@@ -4877,6 +4877,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         parseFile.save().then(function() {
                 alert("Got it!");
                 $rootScope.userAvatar = parseFile.url();
+                alert (parseFile.url());
                 console.log("Ok");
                 console.log(arguments.toString());
             }, function(error) {
