@@ -2305,7 +2305,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             }
             
             function onSuccess(position) {
-                alert("onSuccess() called!");
+                //alert("onSuccess() called!");
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
                 
@@ -3996,7 +3996,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
 
     $scope.$watch($rootScope.publicName, function () {
         try {
-                                      alert('Device is ready! Make sure you set your app_id below this alert.');
+                                      //alert('Device is ready! Make sure you set your app_id below this alert.');
                                       
                                       //FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
                                       Parse.FacebookUtils.init({
@@ -4009,7 +4009,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                                         xfbml:true, // parse XFBML
                                         oauth:true
                                     });
-                                    alert("Parse Facebook Utility Initialized!");
+                                    //alert("Parse Facebook Utility Initialized!");
                                       //FB.getLoginStatus(function(response){
                                       //fbApiInit = true;
 
@@ -4116,9 +4116,9 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
     $scope.phonegapFBLogin = function() {
         console.log('In home');
         
-            if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')){ alert('Cordova variable does not exist. Check that you have included cordova.js correctly')} else {alert("First Exists");};
-            if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')}else {alert("Second Exists");};
-            if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')}else {alert("Third Exists");};
+            if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')){ alert('Cordova variable does not exist. Check that you have included cordova.js correctly')};
+            if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')};
+            if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')};
           
             //FB.login(function (response) {
                 //if (response.status === 'connected') {
@@ -4126,7 +4126,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                     
              Parse.FacebookUtils.logIn("email,publish_actions",{
                  success: function (_user) {
-                        alert("Logged In");
+                        //alert("Logged In");
                 if (!_user.existed()) {
                     alert("User signed up and logged in through Facebook!");
                 } else {
@@ -4862,7 +4862,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         navigator.camera.getPicture(onSuccess,onFail,options);
     };
     var onSuccess = function(data) {
-        alert("On Success! ");
+        //alert("On Success! ");
        
         //imageData=data.substr(data.lastIndexOf('/')+1);
         //imageData=data;
@@ -4873,12 +4873,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         Parse.initialize(parseAPPID,parseJSID);
         
         var parseFile = new Parse.File("mypic.jpg", {base64:data});
-        alert("ParseFile:");    
+        
         parseFile.save().then(function() {
                 alert("Got it!");
                 $rootScope.userAvatar = parseFile.url();
-                alert (parseFile.url());
+                //alert (parseFile.url());
                 $rootScope.$broadcast("load_user_channel");
+                $rootScope.$broadcast("feedbackImg_uploaded");
                 console.log("Ok");
                 console.log(arguments.toString());
             }, function(error) {
